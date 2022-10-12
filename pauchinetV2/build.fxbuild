@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<anttasks:AntTask xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:anttasks="http://org.eclipse.fx.ide.jdt/1.0" buildDirectory="C:\Users\Manuel Tijerina\Desktop\JavaOrigis\Jars Creados" cssToBin="true">
+  <deploy height="20" includeDT="true" placeholderref="pauchinet" placeholderid="pa" width="20" packagingFormat="exe" verbose="true">
+    <application name="pauchinetV2" mainclass="application.Main" version="1.0" toolkit="fx"/>
+    <info title="pauchinet" vendor="com.tijenet"/>
+  </deploy>
+  <signjar/>
+</anttasks:AntTask>
