@@ -10,20 +10,12 @@ public class Main extends Application {
 	
 	public Botones mainMenu = new Botones(10);
 	public BarraInferior barra = new BarraInferior(30);
-	public FormPeliculas formPeliculas = new FormPeliculas();
 	
 	public static BorderPane centerPane = new BorderPane();
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
-			//------------------------------------------------------------
-			// REMOVER CUANDO FUNCIONE EL MENU
-			this.formPeliculas.setAlignment(Pos.TOP_CENTER);
-			centerPane.setCenter(this.formPeliculas);
-			
-			//------------------------------------------------------------
 			BorderPane root = new BorderPane();
 			
 			this.mainMenu.setAlignment(Pos.CENTER);

@@ -1,6 +1,7 @@
 package application;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
+
 public class FormPeliculas extends GridPane {
 	
 	private ChoiceBox<String> tipoI = new ChoiceBox<String>(FXCollections.observableArrayList("SERIE", "PELICULA", "OTRO"));
@@ -19,6 +21,8 @@ public class FormPeliculas extends GridPane {
 	private ChoiceBox<String> generoI = new ChoiceBox<String>(FXCollections.observableArrayList("ACCION", "CIENCIA FICCION", "COMEDIA", "DOCUMENTAL", "DRAMA", "SUSPENSO", "TERROR", "OTRO"));
 	private TextField imdbI = new TextField();
 	private TextArea comentariosI = new TextArea();
+	
+	public Peliculas peliculas = new Peliculas();
 	
 	public FormPeliculas() {
 		// 
@@ -36,13 +40,14 @@ public class FormPeliculas extends GridPane {
 		Label comentariosL = new Label("Comentarios: ");
 		
 		Button guardarB = new Button("Guardar");
+		guardarB.setOnAction(this::saveMovie);
 		
 		this.add(tituloForm, 2, 0, 2, 1);
 		tituloForm.setTextAlignment(TextAlignment.CENTER);
 		
 		this.add(tipoL, 0, 1);
 		this.add(this.tipoI, 1, 1);
-		this.tipoI.setMaxWidth(300);
+		this.tipoI.setMaxWidth(400);
 		
 		this.add(nombreL, 2, 1);
 		this.add(this.nombreI, 3, 1);
@@ -50,7 +55,7 @@ public class FormPeliculas extends GridPane {
 		
 		this.add(plataformaL, 0, 2);
 		this.add(this.plataformaI, 1, 2);
-		this.plataformaI.setMaxWidth(300);
+		this.plataformaI.setMaxWidth(400);
 		
 		this.add(generoL, 2, 2);
 		this.add(this.generoI, 3, 2);
@@ -58,7 +63,7 @@ public class FormPeliculas extends GridPane {
 		
 		this.add(imdbL, 0, 3);
 		this.add(this.imdbI, 1, 3);
-		this.imdbI.setMaxWidth(300);
+		this.imdbI.setMaxWidth(400);
 		
 		this.add(comentariosL, 2, 3);
 		this.add(this.comentariosI, 3, 3);
@@ -68,6 +73,20 @@ public class FormPeliculas extends GridPane {
 		
 		this.add(guardarB, 2, 4, 2, 1);
 		guardarB.setAlignment(Pos.CENTER);
+	}
+	
+	public void saveMovie(ActionEvent event) {
+		Pelicula pelicula = new Pelicula();
+		
+		pelicula.setTipo(this.tipoI.getSelectionModel().getSelectedItem().toString());
+		pelicula.setNombre(this.nombreI.getText().toUpperCase());
+		pelicula.setPlataforma(this.plataformaI.getSelectionModel().getSelectedItem().toString());
+		pelicula.setGenero(this.generoI.getSelectionModel().getSelectedItem().toString());
+		pelicula.setImdb(this.imdbI.getText().toUpperCase());
+		pelicula.setComentarios(this.comentariosI.getText().toUpperCase());
+		
+		this.peliculas.addPelicula(pelicula);
+		
 	}
 
 }
