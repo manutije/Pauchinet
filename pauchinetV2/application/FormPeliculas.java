@@ -82,10 +82,20 @@ public class FormPeliculas extends GridPane {
 		pelicula.setNombre(this.nombreI.getText().toUpperCase());
 		pelicula.setPlataforma(this.plataformaI.getSelectionModel().getSelectedItem().toString());
 		pelicula.setGenero(this.generoI.getSelectionModel().getSelectedItem().toString());
-		pelicula.setImdb(this.imdbI.getText().toUpperCase());
+		pelicula.setImdb(this.imdbI.getText());
 		pelicula.setComentarios(this.comentariosI.getText().toUpperCase());
 		
 		this.peliculas.addPelicula(pelicula);
+		
+		this.tipoI.getSelectionModel().clearSelection();
+		this.nombreI.setText("");
+		this.plataformaI.getSelectionModel().clearSelection();
+		this.generoI.getSelectionModel().clearSelection();
+		this.imdbI.setText("");
+		this.comentariosI.setText("");
+		
+		Main.centerPane.setCenter(null);
+		
 		
 	}
 

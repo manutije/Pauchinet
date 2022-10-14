@@ -19,6 +19,7 @@ public class Peliculas {
 				            + "loginTimeout=30;";
 	public Connection connection;
 	
+	
 	public Peliculas() {
 		try {
 			this.connection = DriverManager.getConnection(connectionUrl);
@@ -27,9 +28,10 @@ public class Peliculas {
 		} 
 	}
 	
+	
 	public void addPelicula(Pelicula pelicula) {
-		String insertSql = "INSERT INTO dbo.Peliculas (tipo, nombre, plataforma, genero, imdb, comentarios) VALUES "
-	                + "(?,?,?,?,?,?);";
+		String insertSql = "INSERT INTO dbo.Peliculas (tipo, nombre, plataforma, genero, imdb, comentarios, usuario) VALUES "
+	                + "(?,?,?,?,?,?,?);";
 
         try {
         	PreparedStatement insertPelicula = this.connection.prepareStatement(insertSql);
@@ -39,10 +41,13 @@ public class Peliculas {
         	insertPelicula.setString(4, pelicula.getGenero());
         	insertPelicula.setString(5, pelicula.getImdb());
         	insertPelicula.setString(6, pelicula.getComentarios());
+        	insertPelicula.setString(7, "MANUTIJE");
             insertPelicula.execute();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+        
+        this.peliculas.add(pelicula);
 	}
 }

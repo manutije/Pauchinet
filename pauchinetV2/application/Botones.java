@@ -45,14 +45,5 @@ public class Botones extends HBox {
 	public void moviesForm(ActionEvent event) {
 		Main.centerPane.setCenter(this.formPeliculas);
 		this.formPeliculas.setAlignment(Pos.TOP_CENTER);
-		this.openMovies.setText("Regresar");
-		this.openMovies.setOnAction(this::goBackOne);
 	}
-	
-	public void goBackOne(ActionEvent event) {
-		Main.centerPane.setCenter(null);
-		this.openMovies.setText("Peliculas & Series");
-		this.openMovies.setOnAction(this::moviesForm);
-	}
-
 }
