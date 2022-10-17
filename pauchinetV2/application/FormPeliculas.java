@@ -17,14 +17,12 @@ public class FormPeliculas extends GridPane {
 	
 	private ChoiceBox<String> tipoI = new ChoiceBox<String>(FXCollections.observableArrayList("SERIE", "PELICULA", "OTRO"));
 	private TextField nombreI = new TextField();
-	private ChoiceBox<String> plataformaI = new ChoiceBox<String>(FXCollections.observableArrayList("AMAZON", "CINE", "DISNEY", "HBO MAX", "NETFLIX", "PARAMOUNT","STARPLUS", "OTRO"));
+	private ChoiceBox<String> plataformaI = new ChoiceBox<String>(FXCollections.observableArrayList("AMAZON", "APPLE", "CINE", "DISNEY", "HBO MAX", "NETFLIX", "PARAMOUNT","STARPLUS", "OTRO"));
 	private ChoiceBox<String> generoI = new ChoiceBox<String>(FXCollections.observableArrayList("ACCION", "CIENCIA FICCION", "COMEDIA", "DOCUMENTAL", "DRAMA", "SUSPENSO", "TERROR", "OTRO"));
 	private TextField imdbI = new TextField();
 	private TextArea comentariosI = new TextArea();
 	
 	public Peliculas peliculas = new Peliculas();
-	
-	public static TablaPeliculas tabla = new TablaPeliculas();
 	
 	public FormPeliculas() {
 		// 
@@ -42,7 +40,12 @@ public class FormPeliculas extends GridPane {
 		Label comentariosL = new Label("Comentarios: ");
 		
 		Button guardarB = new Button("Guardar");
+		guardarB.setMinWidth(300);
 		guardarB.setOnAction(this::saveMovie);
+		
+		Button regresarB = new Button("Regresar");
+		regresarB.setMinWidth(400);
+		regresarB.setOnAction(this::goBack);
 		
 		this.add(tituloForm, 2, 0, 2, 1);
 		tituloForm.setTextAlignment(TextAlignment.CENTER);
@@ -73,10 +76,9 @@ public class FormPeliculas extends GridPane {
 		this.comentariosI.setMaxHeight(60);
 		this.comentariosI.setWrapText(true);
 		
-		this.add(guardarB, 2, 4, 2, 1);
+		this.add(guardarB, 0, 4, 2, 1);
+		this.add(regresarB, 2, 4, 2, 1);
 		guardarB.setAlignment(Pos.CENTER);
-		
-		this.add(tabla, 0, 5, 4, 4);
 	}
 	
 	public void saveMovie(ActionEvent event) {
@@ -90,7 +92,7 @@ public class FormPeliculas extends GridPane {
 		pelicula.setComentarios(this.comentariosI.getText().toUpperCase());
 		
 		this.peliculas.addPelicula(pelicula);
-		tabla.addPelicula(pelicula);
+		Main.tablaPeliculas.addPelicula(pelicula);
 		
 		this.tipoI.getSelectionModel().clearSelection();
 		this.nombreI.setText("");
@@ -99,9 +101,19 @@ public class FormPeliculas extends GridPane {
 		this.imdbI.setText("");
 		this.comentariosI.setText("");
 		
-		Main.centerPane.setCenter(null);
+		Main.centerPane.setCenter(Main.tablaPeliculas);
+	}
+	
+	public void goBack(ActionEvent event) {
 		
+		this.tipoI.getSelectionModel().clearSelection();
+		this.nombreI.setText("");
+		this.plataformaI.getSelectionModel().clearSelection();
+		this.generoI.getSelectionModel().clearSelection();
+		this.imdbI.setText("");
+		this.comentariosI.setText("");
 		
+		Main.centerPane.setCenter(Main.tablaPeliculas);
 	}
 
 }

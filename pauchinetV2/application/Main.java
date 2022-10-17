@@ -12,6 +12,7 @@ public class Main extends Application {
 	public BarraInferior barra = new BarraInferior(30);
 	
 	public static BorderPane centerPane = new BorderPane();
+	public static TablaPeliculas tablaPeliculas = new TablaPeliculas();
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -24,6 +25,7 @@ public class Main extends Application {
 			
 			root.setTop(this.mainMenu);
 			root.setCenter(centerPane);
+			centerPane.setCenter(tablaPeliculas);
 			root.setBottom(barra);
 			
 			Scene scene = new Scene(root);

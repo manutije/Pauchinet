@@ -47,3 +47,11 @@ Button:pressed{
 	-fx-text-fill: white;
 	-fx-font-size: 1.4em;
 }
+
+.Titulos{
+	-fx-background-color: red;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-text-alignment: center;
+	-fx-font-size: 1.4em;
+}
