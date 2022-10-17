@@ -3,7 +3,9 @@ package application;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Peliculas {
@@ -16,15 +18,29 @@ public class Peliculas {
 				            + "password=@Avanti2;"
 				            + "encrypt=true;"
 				            + "trustServerCertificate=false;"
-				            + "loginTimeout=30;";
+				            + "loginTimeout=2;";
 	public Connection connection;
 	
 	
 	public Peliculas() {
 		try {
 			this.connection = DriverManager.getConnection(connectionUrl);
+			Statement statement = this.connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM dbo.Peliculas;");                       
+                   while( rs.next()){
+                	   Pelicula pelicula = new Pelicula();
+                	   pelicula.setTipo(rs.getString(2));
+                	   pelicula.setNombre(rs.getString(3));
+                	   pelicula.setPlataforma(rs.getString(4));
+                	   pelicula.setGenero(rs.getString(5));
+                	   pelicula.setImdb(rs.getString(6));
+                	   pelicula.setComentarios(rs.getString(7));
+                	   this.peliculas.add(pelicula);
+                   }
+            rs.close();
+            statement.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BarraInferior.estatusRed.setText("Desconectado: (Offline)");
 		} 
 	}
 	
@@ -49,5 +65,21 @@ public class Peliculas {
         }
         
         this.peliculas.add(pelicula);
+	}
+	
+	public ArrayList<Pelicula> getPeliculas(){
+		
+		return this.peliculas;
+	}
+	
+	public void deletePeliculas() {
+		PreparedStatement statement;
+		try {
+			statement = this.connection.prepareStatement("TRUNCATE TABLE dbo.Peliculas;");
+			statement.execute();	
+			this.peliculas.clear();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
 	}
 }
